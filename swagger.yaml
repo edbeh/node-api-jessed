@@ -162,7 +162,7 @@ paths:
       produces:
         - application/json
       responses:
-        204:
+        '204':
           description: Study Deleted Successfully
         '400':
           description: Invalid Fields
@@ -195,7 +195,7 @@ definitions:
     type: object
     properties:
       status:
-        type: integer
+        type: string
       message:
         type: string
       body:
