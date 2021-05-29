@@ -20,7 +20,7 @@ paths:
         - Bearer: []
       tags:
         - Study Module
-      summary: Study API
+      summary: Add new study
       description: API for creating study
       parameters:
         - in: body
@@ -45,7 +45,7 @@ paths:
         - Bearer: []
       tags:
         - Study Module
-      summary: Study API
+      summary: Get all studies
       description: API for fetching all studies
       parameters:
         - name: limit
@@ -97,7 +97,7 @@ paths:
         - Bearer: []
       tags:
         - Study Module
-      summary: Fetch Study Detail
+      summary: Get study by Id
       description: API to fetch Study Detail
       parameters:
         - name: id
@@ -121,7 +121,7 @@ paths:
         - Bearer: []
       tags:
         - Study Module
-      summary: Update Study
+      summary: Update study by Id
       description: Update Study
       parameters:
         - name: id
@@ -151,7 +151,7 @@ paths:
         - Bearer: []
       tags:
         - Study Module
-      summary: Remove Study
+      summary: Remove study by Id
       description: Remove Study
       parameters:
         - name: id
