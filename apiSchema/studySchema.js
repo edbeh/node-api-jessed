@@ -4,6 +4,11 @@ const Joi = require('@hapi/joi')
 
 module.exports.getAllStudiesSchema = Joi.object().keys({
   limit: Joi.string(),
+  protocol_title: Joi.string(),
+  status: Joi.string(),
+  type: Joi.string(),
+  condition: Joi.string(),
+  location: Joi.string(),
 })
 
 module.exports.createStudySchema = Joi.object().keys({

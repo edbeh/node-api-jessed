@@ -1,5 +1,7 @@
 const express = require('express')
 const cors = require('cors')
+const swaggerUi = require('swagger-ui-express')
+const YAML = require('yamljs')
 
 const dbConnection = require('./database/connection')
 
@@ -11,8 +13,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const app = express()
-
-console.log(process.env.DB_URL)
 
 // connect to db
 dbConnection()
@@ -26,7 +26,10 @@ app.use(express.urlencoded({ extended: true }))
 
 // routes
 app.use('/api/v1/study', require('./routes/studyRoutes'))
-app.get('/', (req, res) => res.send('Access /api/v1/study to view studies'))
+
+// api documentation
+const swaggerDocument = YAML.load('./swagger.yaml')
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 const PORT = process.env.PORT || 3000
 
