@@ -1,0 +1,202 @@
+swagger: '2.0'
+info:
+  description: JESSED CTMS API Documentation
+  version: '1.0.0'
+  title: Node Rest API documentation
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: edbeh89@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: localhost:3002
+basePath: /api/v1
+schemes:
+  - http
+paths:
+  /study:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Study Module
+      summary: Study API
+      description: API for creating study
+      parameters:
+        - in: body
+          name: body
+          description: Create Study Payload
+          required: true
+          schema:
+            $ref: '#/definitions/Study'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Study Created Successfully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Study Module
+      summary: Study API
+      description: API for fetching all studies
+      parameters:
+        - name: limit
+          in: query
+          description:
+          type: number
+          required: false
+        - name: protocol_title
+          in: query
+          description:
+          type: string
+          required: false
+        - name: status
+          in: query
+          description:
+          type: string
+          enum: ['not initiated', 'ongoing', 'completed']
+          required: false
+        - name: condition
+          in: query
+          description:
+          type: string
+          required: false
+        - name: type
+          in: query
+          description:
+          type: string
+          enum: ['observational', 'interventional']
+          required: false
+        - name: location
+          in: query
+          description:
+          type: string
+          required: false
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Study fetched successfully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  '/study/{id}':
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Study Module
+      summary: Fetch Study Detail
+      description: API to fetch Study Detail
+      parameters:
+        - name: id
+          in: path
+          description:
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Study Fetched Successfully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Study Module
+      summary: Update Study
+      description: Update Study
+      parameters:
+        - name: id
+          in: path
+          description: Study Id
+          type: string
+          required: true
+        - in: body
+          name: body
+          description: Update Study Payload
+          required: true
+          schema:
+            $ref: '#/definitions/Study'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Study Updated Successfully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Study Module
+      summary: Remove Study
+      description: Remove Study
+      parameters:
+        - name: id
+          in: path
+          description: Study Id
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        204:
+          description: Study Deleted Successfully
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  Study:
+    properties:
+      protocol_title:
+        type: string
+        description: study protocol title
+      status:
+        type: string
+        description: current study status
+      condition:
+        type: string
+        description: target disease of the study
+      type:
+        type: string
+        description: observational or interventional study
+      location:
+        type: string
+        description: location where study is conducted
+  ApiResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+      body:
+        type: object

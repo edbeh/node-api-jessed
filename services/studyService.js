@@ -2,10 +2,23 @@ const Study = require('../database/models/studyModel')
 const constants = require('../constants')
 const { transformMongoData, checkIdValidity } = require('../utils/dbHelper')
 
-module.exports.getAllStudies = async ({ limit = 10 }) => {
+module.exports.getAllStudies = async ({
+  limit = 50,
+  protocol_title = '',
+  status = '',
+  type = '',
+  condition = '',
+  location = '',
+}) => {
   try {
     const response = {}
-    const studies = await Study.find({}).limit(parseInt(limit))
+    const studies = await Study.find({
+      protocol_title: { $regex: protocol_title, $options: 'i' },
+      status: { $regex: status, $options: 'i' },
+      type: { $regex: type, $options: 'i' },
+      condition: { $regex: condition, $options: 'i' },
+      location: { $regex: location, $options: 'i' },
+    }).limit(parseInt(limit))
 
     response.data = transformMongoData(studies)
     return response
