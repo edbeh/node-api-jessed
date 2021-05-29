@@ -12,6 +12,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 const app = express()
 
+console.log(process.env.DB_URL)
+
 // connect to db
 dbConnection()
 
