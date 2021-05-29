@@ -9,10 +9,10 @@ info:
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
-host: localhost:3002
+host: cryptic-brushlands-58994.herokuapp.com
 basePath: /api/v1
 schemes:
-  - http
+  - https
 paths:
   /study:
     post:
